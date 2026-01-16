@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+}
+
+.navbar {
+  background-color: lightgray;
+  display: flex;
+  justify-content: end;
+}
+
+.navbar {
+}
+
+.posts {
+  width: 800px;
+  padding: 20px;
+}
+
+.post {
+  display: flex;
+  padding: 15px;
+  border: 2px solid teal;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-wrapper {
+  margin-top: 30px;
+  display: flex;
+  overflow-x: auto;
+}
+
+.pagination-item {
+  padding: 10px;
+  border: 1px solid teal;
+  cursor: pointer;
+}
+
+.page-current {
+  border: 2px solid orange;
+  font-weight: bold;
+}
