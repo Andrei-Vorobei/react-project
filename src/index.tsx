@@ -1,11 +1,8 @@
-import { Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router";
-import { App } from "@/components/App";
-import { About } from "./pages/About";
-import { Home } from "./pages/Home";
-import { Posts } from "./pages/Posts";
-import { RoutesApp } from "./Routes";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { routesApp } from "./Routes";
+import { AuthContext } from "./context";
+import { useEffect, useState } from "react";
 
 const root = document.getElementById('root');
 
@@ -15,30 +12,23 @@ if (!root) {
 
 const container = createRoot(root);
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />
-      },
-      {
-        path: 'posts',
-        element: <Posts />,
-      },
-      {
-        path: 'about',
-        element: <About />
-      },
-    ]
-  },
-]);
 
-// container.render(
-//   <BrowserRouter>
-//     <RoutesApp />
-//   </BrowserRouter>
-// );
-container.render(<RouterProvider router={router} />);
+const Index: React.FC = () => {
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('auth') === 'true') {
+      setIsAuth(true);
+    }
+  }, []);
+  
+  const router = createBrowserRouter(routesApp(isAuth));
+
+  return (
+    <AuthContext.Provider value={{ isAuth, setIsAuth }}>
+      <RouterProvider router={router} />
+    </AuthContext.Provider>
+  );
+};
+
+container.render(<Index />);
