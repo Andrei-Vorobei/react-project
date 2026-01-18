@@ -22,8 +22,8 @@ export type PostFormType = {
   create: (post: ItemType) => void;
 };
 
-type option = {
-  value: string;
+export type OptionType = {
+  value: string | number;
   name: string;
 }
 
@@ -31,10 +31,17 @@ export type SortType = keyof Omit<ItemType, 'id'>;
 
 export type SelectType = {
   defaultValue: string;
-  value: SortType | '';
-  options: option[]
-  onChange: (val: string) => void;
+  value: string | number;
+  options: OptionType[];
+  onChange: (val: string | number) => void;
 };
+
+// export type SelectType<T, O> = {
+//   defaultValue: T;
+//   value: T;
+//   options: O[]
+//   onChange: (val: T) => void;
+// };
 
 export type FilterType = {
   sort: SortType | '';
